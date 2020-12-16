@@ -23,7 +23,7 @@ cmh$id_wind <- paste(cmh$Chromosome, cmh$BP_start, sep=".")
 #create column with chromosome and bp merged together
 cmh$id <- paste(cmh$Chromosome, cmh$Start, sep=".")
 
-cmh_sig <- read.delim("cmh_window_geomean_sigonly_SD_round2")
+cmh_sig <- read.delim("cmh_window_geomean_sigonly_SD")
 cmh_sig_id_list <- cmh_sig[c("ID")]
 colnames(cmh_sig_id_list) <- c("id_wind")
 
