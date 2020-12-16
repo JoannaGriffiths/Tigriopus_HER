@@ -1,4 +1,4 @@
-# Scripts and data from Griffiths, J.S. et al. (2020) Differential responses to ocean acidification between populations of *Balanophyllia elegans* corals from high and low upwelling environments. Mol. Ecol. DOI: 10.1111/mec.15050
+# Scripts and data from Joanna S Griffiths, Yasmeen Kawji, Morgan W Kelly. 2020. An Experimental Test of Adaptive Introgression in Locally Adapted Populations of Splash Pool Copepods, Molecular Biology and Evolution, https://doi.org/10.1093/molbev/msaa289
 
 ## Gene Expression Analysis
 
@@ -16,7 +16,7 @@
 
 *Script*: kaks.py
 
-*Input files*: 
+*Input files*: Bodega annotated vcf file
 
 *Output files*: BR_kaks.txt
 
@@ -29,30 +29,38 @@
 
 *Output files*: kaks_cmhsig_all_fixed
 
-*Description*: Script runs a permutation and t-test to determine if the kaks values for genes under heat tolerance selection have lower kaks values than the genome-wide average.
+*Description*: Script runs a permutation and t-test to determine if the kaks values for genes under heat tolerance selection have a significantly different mean kaks value than the genome-wide average.
 
 
 
 ## LD Analysis
+Note: LD analysis not included in final manuscript
 
-*Script*: DeSeq2.R
+*Script*: mergeChr_LD_results.R
 
-*Input files*: Orthoblast_RSEM_merged_matrix, column_2transcriptomes.txt
+*Input files*: 1S_LDx_chr1, 1S_LDx_chr10, 1S_LDx_chr11, 1S_LDx_chr2, 1S_LDx_chr3, 1S_LDx_chr4, 1S_LDx_chr5, 1S_LDx_chr6, 1S_LDx_chr7, 1S_LDx_chr8, 1S_LDx_chr9
 
-*Output files*: output_DEG_GOLtp1.txt, output_DEG_GOLtp2.txt, output_DEG_PACtp1.txt, output_DEG_PACtp2.txt
+*Output files*: LD_1S
 
-*Description*: Script contains analysis using DeSeq2. The merged matrix file contains the total counts of contains for each “Orthogroup”. The column file gives an explanation for the headers in the matrix file (the treatment conditions and population names for each read file. Output files contain the pvalues for log fold changes in Orthogroups in response to pH for each population timepoint (day 9 and 29).
+*Description*: Script contains takes output from LDx.pl and merges all chromosome level results into a single file for each sample. Files above are an example for one of the lines under selection (1S). The following was repeated for all selected and control lines.
+
+
+*Script*: LD_vs_Distance.R
+
+*Input files*: cmh_10000window_overlap_forLD.tx, LD_1S, LD_2S, LD_3S, LD_4S, LD_5S, LD_1U, LD_2U, LD_4U, LD_5U, LD_6U
+
+*Output*: figure displaying LD vs bp distance between SNPs
+
+*Description*: Script models LD as a function of distance between SNPs and displays results as a graph. Hypothesis was that SNPs under heat tolerance selection had a higher LD than SNPs not under heat tolerance selection in selected lines. We also hypothesized SNPs under heat tolerance selection in selected lines had higher LD than these same SNPs in the control line.
 
 
 
 ## LT50 Analysis
 
-*Script*: Please see scripts and explanations located at: https://github.com/z0on/GO_MWU\
+*Script*: LT50_ANOVA.R
 
-*Input files*: Orthoblast_interproresults_nonredun.csv, pvalue_GOL_tp1, pvalue_GOL_tp2, pvalue_PAC_tp1, pvalue_PAC_tp2
+*Input files*: LT50_data
 
-*Output files*: BP_pvalue_GOL_tp1, BP_pvalue_GOL_tp2, BP_pvalue_PAC_tp1, BP_pvalue_PAC_tp2, MF_pvalue_GOL_tp1, MF_pvalue_GOL_tp2, MF_pvalue_PAC_tp1, MF_pvalue_PAC_tp2
-
-*Description*: Script contains analysis for functional enrichment of logfold contig changes. The Orthoblast_interproresults_nonredun.csv input file contains the GO terms associated with each Orthogroup. The pvalue input files contain the signed logfold pvalues for expression changes derived from the DEG analysis using DeSeq2. Output files correspind to each input file name and whether the Biological Processes (BP) or Molecular Functions (MF) were analyzed.
+*Description*: Script runs ANOVA to compare LT50 values among treatment groups.
 
 
